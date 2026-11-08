@@ -1,0 +1,926 @@
+<!doctype html>
+<html lang="nl">
+<head>
+<meta charset="utf-8">
+<meta name="robots" content="noindex, nofollow">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Kerstboomboer · Nordmann uit Denemarken, tot in je woonkamer</title>
+<meta name="description" content="Nordmann kerstbomen, zelf uitgezocht in Denemarken. Voor 15:00 besteld, morgen tot in je woonkamer. Amsterdam en Den Haag.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800;900&family=Barlow:wght@400;500;600;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="preload" as="image" href="img/hero-breed.jpg" media="(min-width: 821px)">
+<link rel="preload" as="image" href="img/hero-hoog.jpg" media="(max-width: 820px)">
+<!--
+  Kerstboomboer v7, designed by TUKI. Built on v4 (the one the owner liked): TUKI's night frame, huge
+  condensed type, his feed's stickers, things that move because something real is happening.
+
+  Two pieces for approval before the rest of the page is built:
+  1. The first screen. His own lit tree on the Danish field; the lights switch on when the page opens.
+     The ticket under the headline sells: size, price, the day it arrives and what delivery costs.
+  2. "Van veld tot woonkamer": one pinned scroll through the real journey, using his own field videos and
+     photos (field -> tagging -> netting -> the van -> the stairs -> the living room), ending on a wall of
+     real customers' trees. His current site can't tell this story; he has the footage for it.
+-->
+<style>
+:root{
+  --night:#0b150f; --card:#122019; --ring:rgba(247,237,209,.10);
+  --cream:#f7edd1; --mute:rgba(247,237,209,.66); --faint:rgba(247,237,209,.4);
+  --red:#c9211c; --red-hi:#e0302a; --green:#174226; --ink:#141212;
+  --cond:"Barlow Condensed","Avenir Next Condensed",sans-serif; --sans:"Barlow",system-ui,sans-serif; --mono:"DM Mono",ui-monospace,monospace;
+  --ease:cubic-bezier(.2,.8,.2,1); --spring:cubic-bezier(.34,1.56,.64,1);
+  --gut:clamp(18px,4vw,56px);
+}
+*{box-sizing:border-box;margin:0}
+html{-webkit-text-size-adjust:100%}
+body{background:var(--night);color:var(--cream);font:500 17px/1.5 var(--sans);overflow-x:clip;-webkit-font-smoothing:antialiased}
+img,video{display:block;max-width:100%}
+a{color:inherit}
+button{font:inherit;color:inherit;cursor:pointer}
+:focus-visible{outline:3px solid var(--cream);outline-offset:3px}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.num{font-variant-numeric:tabular-nums}
+.wrap{max-width:1440px;margin:0 auto;padding:0 var(--gut)}
+
+/* the feed's sticker: the one graphic device */
+.stk{display:inline-block;font:900 1em/.9 var(--cond);text-transform:uppercase;background:var(--red);color:var(--cream);padding:.07em .2em .02em;transform:rotate(var(--r,-2deg));white-space:nowrap}
+.stk.c{background:var(--cream);color:var(--green)} .stk.g{background:var(--green);color:var(--cream)} .stk.k{background:var(--ink);color:var(--cream)}
+.stack{display:flex;flex-direction:column;align-items:flex-start;gap:.06em}
+.stack .stk:nth-child(2){--r:1.5deg;margin-left:.3em}
+.stack .stk:nth-child(3){--r:-1deg;margin-left:.08em}
+.slap .stk{opacity:0;transform:rotate(calc(var(--r,-2deg) - 9deg)) scale(1.3)}
+.slap.in .stk{opacity:1;transform:rotate(var(--r,-2deg)) scale(1);transition:transform .55s var(--spring),opacity .15s}
+.slap.in .stk:nth-child(2){transition-delay:.13s}.slap.in .stk:nth-child(3){transition-delay:.26s}
+
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:.55em;border:0;border-radius:999px;background:var(--red);color:var(--cream);font:800 21px/1 var(--cond);text-transform:uppercase;letter-spacing:.02em;padding:17px 28px 16px;text-decoration:none;white-space:nowrap;transition:transform .25s var(--spring),background .2s}
+.btn:hover{background:var(--red-hi);transform:translateY(-2px)}
+.btn:active{transform:scale(.97)}
+.btn.ok{background:var(--green)}
+.btn svg{width:19px;height:19px}
+
+/* ---------- top bar ---------- */
+.top{position:fixed;inset:0 0 auto;z-index:40;display:flex;align-items:center;justify-content:space-between;gap:20px;padding:14px var(--gut);transition:background .3s}
+.top.solid{background:rgba(11,21,15,.86);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px)}
+.brand{display:flex;align-items:center;gap:12px;text-decoration:none}
+.brand img{width:50px;height:50px;border-radius:50%;box-shadow:0 0 0 2px rgba(247,237,209,.15)}
+.brand b{font:900 24px/1 var(--cond);text-transform:uppercase}
+.nav{display:flex;gap:28px;margin-left:auto;font:700 18px/1 var(--cond);text-transform:uppercase;letter-spacing:.03em}
+.nav a{text-decoration:none;color:var(--mute);transition:color .2s}
+.nav a:hover{color:var(--cream)}
+.tr{display:flex;align-items:center;gap:10px}
+.lang{background:none;border:1.5px solid var(--ring);border-radius:999px;padding:9px 12px;font:800 15px/1 var(--cond);color:var(--mute)}
+.cartbtn{display:flex;align-items:center;gap:10px;background:var(--cream);color:var(--ink);border:0;border-radius:999px;padding:8px 9px 8px 18px;font:800 18px/1 var(--cond);text-transform:uppercase}
+.cartbtn .c{min-width:28px;height:28px;border-radius:99px;background:var(--red);color:var(--cream);display:grid;place-items:center;font:800 16px/1 var(--cond)}
+.c.pop{animation:pop .45s var(--spring)}
+@keyframes pop{40%{transform:scale(1.5)}}
+
+/* ---------- 1. FIRST SCREEN: lights on ---------- */
+.hero{position:relative;min-height:100svh;display:flex;align-items:center;overflow:hidden;isolation:isolate}
+.hero .ph{position:absolute;inset:0;z-index:-3}
+.hero .ph img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:30% 50%}
+.hero .ph .base{filter:brightness(.3) saturate(.75);animation:dusk 2.6s .9s var(--ease) forwards}
+.hero .ph .lit{-webkit-mask:radial-gradient(ellipse 17% 44% at 34% 42%,#000 35%,transparent 100%);mask:radial-gradient(ellipse 17% 44% at 34% 42%,#000 35%,transparent 100%);opacity:0;filter:brightness(1.12) saturate(1.1);animation:lightson 1.5s .55s linear forwards}
+@keyframes lightson{0%{opacity:0}12%{opacity:.75}17%{opacity:.1}30%{opacity:.9}36%{opacity:.35}52%{opacity:1}100%{opacity:1}}
+@keyframes dusk{to{filter:brightness(.78) saturate(.95)}}
+.hero::after{content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;background:
+  linear-gradient(270deg,rgba(11,21,15,.9) 0%,rgba(11,21,15,.62) 30%,rgba(11,21,15,0) 56%),
+  linear-gradient(0deg,var(--night) 0%,rgba(11,21,15,0) 26%)}
+.hero .wrap{width:100%;display:flex;justify-content:flex-end;padding-top:112px;padding-bottom:110px}
+.copy{width:min(640px,48vw)}
+.live{display:flex;align-items:center;gap:10px;font:600 15px/1.35 var(--sans);color:var(--mute);margin-bottom:20px}
+.live b{color:var(--cream)}
+.dot{width:9px;height:9px;border-radius:50%;background:#4ade80;animation:ping 2s infinite;flex:none}
+@keyframes ping{0%{box-shadow:0 0 0 0 rgba(74,222,128,.55)}80%,100%{box-shadow:0 0 0 12px rgba(74,222,128,0)}}
+.hero h1{font-size:clamp(64px,8.6vw,150px)}
+.hero .lede{font-size:clamp(17px,1.35vw,20px);color:rgba(247,237,209,.8);margin:24px 0 28px;max-width:30em}
+
+/* the ticket: it sells (size, price, day, delivery cost) */
+.ticket{position:relative;background:var(--cream);color:var(--ink);border-radius:18px;padding:18px 20px 18px;box-shadow:0 34px 70px -24px rgba(0,0,0,.75);opacity:0;animation:land .9s 1.5s var(--spring) forwards}
+.ticket::before,.ticket::after{content:"";position:absolute;top:calc(100% - 82px);width:22px;height:22px;border-radius:50%;background:#0d1811}
+.ticket::before{left:-11px}.ticket::after{right:-11px}
+@keyframes land{from{opacity:0;transform:translateY(34px) rotate(2.5deg)}to{opacity:1;transform:rotate(-.6deg)}}
+.t-head{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:12px}
+.t-head b{font:800 19px/1 var(--cond);text-transform:uppercase;letter-spacing:.03em}
+.seg{display:inline-flex;background:rgba(20,18,18,.07);border-radius:999px;padding:3px}
+.seg button{background:none;border:0;border-radius:999px;padding:7px 12px;font:800 15px/1 var(--cond);text-transform:uppercase;letter-spacing:.02em;color:rgba(20,18,18,.6)}
+.seg button[aria-pressed=true]{background:var(--ink);color:var(--cream)}
+.chips{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:6px}
+.chips.pot{grid-template-columns:repeat(4,minmax(0,1fr))}
+.chips button{position:relative;background:#fff;border:0;border-radius:10px;padding:10px 2px 8px;line-height:1;box-shadow:inset 0 0 0 1.5px rgba(20,18,18,.1);transition:transform .2s var(--spring),background .15s}
+.chips button:hover{transform:translateY(-2px)}
+.chips b{display:block;font:800 18px/1 var(--cond);letter-spacing:-.01em}
+.chips small{display:block;font:600 12px/1 var(--sans);color:rgba(20,18,18,.55);margin-top:5px}
+.chips button[aria-checked=true]{background:var(--ink);color:var(--cream);box-shadow:none}
+.chips button[aria-checked=true] small{color:#d7caa2}
+.chips .best{position:absolute;top:-9px;left:50%;transform:translateX(-50%) rotate(-4deg);background:var(--red);color:var(--cream);font:800 10px/1 var(--cond);letter-spacing:.05em;padding:3px 5px 2px;text-transform:uppercase;white-space:nowrap}
+.rule{font:500 12px/1.3 var(--sans);color:rgba(20,18,18,.5);margin-top:9px}
+.t-foot{display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:18px;border-top:2px dashed rgba(20,18,18,.18);margin-top:16px;padding-top:16px}
+.price{font:900 52px/.85 var(--cond);letter-spacing:-.01em}
+.price small{display:block;font:600 12px/1.2 var(--sans);color:rgba(20,18,18,.55);margin-top:6px;letter-spacing:0}
+.when{font:500 14px/1.35 var(--sans);color:rgba(20,18,18,.72)}
+.when b{color:var(--ink);font-weight:700}
+.when .day{color:var(--green)}
+.cue{position:absolute;left:50%;bottom:26px;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:8px;font:800 15px/1 var(--cond);text-transform:uppercase;letter-spacing:.06em;color:var(--mute);text-decoration:none;opacity:0;animation:fadein 1s 2.4s forwards}
+.cue i{width:2px;height:34px;background:linear-gradient(var(--cream),transparent);animation:drip 1.8s infinite}
+@keyframes fadein{to{opacity:1}}
+@keyframes drip{0%{transform:scaleY(0);transform-origin:top}50%{transform:scaleY(1);transform-origin:top}51%{transform-origin:bottom}100%{transform:scaleY(0);transform-origin:bottom}}
+
+/* ---------- 2. VAN VELD TOT WOONKAMER: one pinned scroll ---------- */
+.journey{position:relative;height:760svh}
+.stage{position:sticky;top:0;height:100svh;overflow:hidden;isolation:isolate;background:var(--night)}
+.amb{position:absolute;inset:-60px;z-index:-2;opacity:0}
+.amb img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:blur(50px) brightness(.3) saturate(1.2);opacity:0;transition:opacity .8s var(--ease);transform:scale(1.1)}
+.amb img.on{opacity:1}
+.stage::after{content:"";position:absolute;inset:0;z-index:-1;background:radial-gradient(ellipse at 70% 50%,transparent 0,rgba(11,21,15,.55) 70%),linear-gradient(0deg,rgba(11,21,15,.7),transparent 30%)}
+.grid{position:absolute;inset:0;display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:center;gap:clamp(30px,5vw,90px);padding:96px var(--gut) 120px;max-width:1440px;margin:0 auto}
+.txt{position:relative;min-height:56vh;min-width:0}
+.ch{position:absolute;left:0;right:0;top:50%;transform:translateY(-50%);opacity:0;pointer-events:none;transition:opacity .45s var(--ease)}
+.ch.on{opacity:1;pointer-events:auto}
+.ch .n{font:800 18px/1 var(--cond);letter-spacing:.08em;text-transform:uppercase;color:var(--faint);margin-bottom:22px;display:flex;gap:12px;align-items:center}
+.ch .n i{width:44px;height:2px;background:var(--red)}
+.ch h2{font-size:clamp(48px,5.8vw,100px)}
+.ch p{font-size:clamp(17px,1.4vw,21px);color:rgba(247,237,209,.82);margin-top:28px;max-width:26em}
+.win{position:relative;height:min(72vh,780px);aspect-ratio:9/16;border-radius:22px;overflow:hidden;background:#000;box-shadow:0 40px 90px -30px rgba(0,0,0,.85),0 0 0 1px rgba(247,237,209,.08)}
+.win>*{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity .6s var(--ease)}
+.win>.on{opacity:1}
+.win .tagz{position:absolute;inset:auto 14px 16px auto;width:auto;height:auto;opacity:1;font:600 12px/1 var(--mono);color:rgba(255,255,255,.8);background:rgba(0,0,0,.4);padding:6px 8px;border-radius:6px;transition:none}
+.route{pointer-events:auto;position:absolute;left:var(--gut);right:var(--gut);bottom:70px;max-width:1328px;margin:0 auto}
+.route .bar{height:2px;background:rgba(247,237,209,.14);position:relative}
+.route .fill{position:absolute;inset:0 auto 0 0;background:var(--red);width:0}
+.route .tree{position:absolute;top:50%;left:0;width:22px;height:28px;transform:translate(-50%,-78%);color:var(--cream)}
+.stops{display:grid;grid-template-columns:repeat(6,1fr);margin-top:12px;font:800 15px/1 var(--cond);text-transform:uppercase;letter-spacing:.06em}
+.stops span{color:var(--faint);transition:color .3s;cursor:pointer;padding:8px 0}
+.stops span.on{color:var(--cream)}
+.stops span:last-child{text-align:right}
+
+/* the ending: a wall of real customers' trees */
+.wall{position:absolute;inset:0;z-index:2;display:grid;grid-template-columns:repeat(14,1fr);grid-auto-rows:1fr;gap:4px;padding:4px;opacity:0;pointer-events:none;background:var(--night);transition:opacity .45s var(--ease)}
+.wall.on{opacity:1}
+.grid,.route,.amb{transition:opacity .35s var(--ease)}
+.stage.walled .grid,.stage.walled .route,.stage.walled .amb{opacity:0!important}
+.wall img{width:100%;height:100%;object-fit:cover;opacity:0;transform:scale(.7);transition:opacity .5s var(--ease),transform .7s var(--spring);transition-delay:calc(var(--d) * 22ms)}
+.wall.on img{opacity:1;transform:none}
+.end{position:absolute;inset:0;z-index:3;display:grid;place-items:center;text-align:center;opacity:0;pointer-events:none;transition:opacity .4s .25s var(--ease);background:radial-gradient(ellipse 46% 52% at 50% 50%,rgba(11,21,15,.94) 0,rgba(11,21,15,.82) 55%,rgba(11,21,15,.25) 100%)}
+.end.on{opacity:1;pointer-events:auto}
+.end .stack{align-items:center;font-size:clamp(58px,8vw,136px)}
+.end .stack .stk:nth-child(2){margin-left:.45em}
+.quote{margin:30px auto 0;max-width:30em;font:500 18px/1.45 var(--sans);color:rgba(247,237,209,.86)}
+.quote b{display:block;margin-top:8px;font:800 16px/1 var(--cond);letter-spacing:.06em;text-transform:uppercase;color:var(--faint)}
+.quote .stars{color:#ffc933;letter-spacing:.1em;margin-right:8px}
+.end .go{margin-top:30px;display:flex;flex-direction:column;align-items:center;gap:14px}
+.end .go small{font:600 14px/1.3 var(--sans);color:var(--mute)}
+
+/* ---------- what's next (owner preview only) ---------- */
+.next{padding:110px var(--gut) 120px;text-align:center}
+.next .box{display:inline-block;max-width:640px;border:1.5px dashed rgba(255,201,51,.5);border-radius:16px;padding:26px 28px;font:400 14px/1.6 var(--mono);color:var(--mute);text-align:left}
+.next b{color:#ffc933;font-weight:500}
+.foot-ill{background:var(--night);line-height:0}
+.foot-ill img{width:100%;height:auto;display:block}
+@media (max-width:820px){.foot-ill img{height:min(46vw,240px);object-fit:cover;object-position:50% 100%}}
+footer{border-top:0;background:#ecebe6;color:#4a463c;padding:30px var(--gut) 90px;display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;font-size:14px}
+footer a{color:var(--ink)}
+footer b{color:var(--ink);font:900 20px/1.2 var(--cond);text-transform:uppercase}
+
+/* ---------- basket ---------- */
+.scrim{position:fixed;inset:0;background:rgba(0,0,0,.55);opacity:0;pointer-events:none;transition:.25s;z-index:60}
+.scrim.open{opacity:1;pointer-events:auto}
+.sheet{position:fixed;top:0;right:0;bottom:0;width:min(440px,100%);background:var(--cream);color:var(--ink);z-index:61;transform:translateX(102%);transition:transform .35s var(--ease);display:flex;flex-direction:column}
+.sheet.open{transform:none}
+.sheet>header{display:flex;justify-content:space-between;align-items:center;padding:18px 22px;border-bottom:1px solid rgba(20,18,18,.12)}
+.sheet h2{font:900 34px/1 var(--cond);text-transform:uppercase}
+.sheet .x{background:none;border:2px solid var(--ink);border-radius:99px;width:40px;height:40px;font-size:22px;line-height:1}
+.sheet .body{flex:1;overflow:auto;padding:4px 22px 22px}
+.empty{padding:52px 0;text-align:center;color:rgba(20,18,18,.6)}
+.empty .stack{align-items:center;font-size:54px;margin-bottom:14px}
+.line{display:grid;grid-template-columns:62px 1fr auto;gap:14px;padding:16px 0;border-bottom:1px dashed rgba(20,18,18,.25)}
+.line .th{width:62px;height:82px;background:#fff center/contain no-repeat;border-radius:8px}
+.line b{font:800 20px/1.1 var(--cond);text-transform:uppercase;display:block}
+.line small{display:block;font:500 13px/1.4 var(--sans);color:rgba(20,18,18,.6);margin-top:3px}
+.line .rt{font:800 20px/1 var(--cond)}
+.rm{background:none;border:0;padding:0;margin-top:6px;font:600 13px/1 var(--sans);text-decoration:underline;color:var(--red)}
+.field{margin-top:20px}
+.field .l,.field label{display:block;font:800 16px/1 var(--cond);text-transform:uppercase;letter-spacing:.03em;margin-bottom:8px}
+.field input{width:100%;border:2px solid var(--ink);border-radius:12px;background:#fff;padding:11px 14px;font:800 24px/1 var(--cond);letter-spacing:.08em}
+.zone{margin-top:8px;font:600 14px/1.4 var(--sans)}
+.dd{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:6px}
+.dd button{border:0;background:#fff;padding:9px 0 8px;text-align:center;line-height:1.1;border-radius:10px;box-shadow:inset 0 0 0 1.5px rgba(20,18,18,.1)}
+.dd small{display:block;font:600 11px/1.2 var(--sans);color:rgba(20,18,18,.55)}
+.dd b{font:900 24px/1.05 var(--cond)}
+.dd button[aria-pressed=true]{background:var(--red);color:var(--cream);box-shadow:none}
+.dd button[aria-pressed=true] small{color:#ffd9d4}
+.sum{padding:16px 22px 22px;border-top:1px solid rgba(20,18,18,.12);background:#efe2bf;font-size:15px}
+.sum .r{display:flex;justify-content:space-between;padding:3px 0}
+.sum .r.t{font:900 30px/1.1 var(--cond);text-transform:uppercase;border-top:2px dashed rgba(20,18,18,.3);margin-top:8px;padding-top:12px}
+.sum .btn{width:100%;margin-top:14px}
+.handoff{font-size:12px;color:rgba(20,18,18,.55);margin-top:10px;text-align:center}
+.toast{position:fixed;left:50%;top:88px;transform:translate(-50%,-14px);background:var(--cream);color:var(--ink);padding:12px 18px;border-radius:999px;font:600 14px/1.35 var(--sans);max-width:min(560px,92vw);z-index:70;opacity:0;pointer-events:none;transition:.25s;box-shadow:0 10px 30px -10px rgba(0,0,0,.6)}
+.toast.show{opacity:1;transform:translate(-50%,0)}
+
+.tuki{position:fixed;right:14px;bottom:14px;z-index:50;background:#000;color:#f7edd1;border-radius:99px;padding:7px 7px 7px 14px;font:500 12px/1 var(--mono);display:flex;gap:10px;align-items:center;box-shadow:0 4px 18px rgba(0,0,0,.5);border:1px solid rgba(247,237,209,.12)}
+.tuki b{color:#ffc933;font-weight:500}
+.tuki button{background:#f7edd1;color:#141212;border:0;border-radius:99px;padding:7px 11px;font:600 12px/1 var(--mono)}
+.tuki button[aria-pressed=true]{background:#ffc933}
+body.chk [data-check]{outline:2px dashed #ffc933!important;outline-offset:4px}
+
+/* ---------- the rest of the page: same night, same stickers ---------- */
+.sec{padding:clamp(96px,13vh,160px) 0}
+.h2{font-size:clamp(52px,6.2vw,108px)}
+.lede{font-size:clamp(17px,1.35vw,20px);color:var(--mute);max-width:30em;margin-top:26px}
+.ghost{display:inline-flex;align-items:center;gap:.5em;background:none;border:1.5px solid rgba(247,237,209,.3);border-radius:999px;padding:14px 22px;font:800 18px/1 var(--cond);text-transform:uppercase;letter-spacing:.03em;color:var(--cream);text-decoration:none;transition:border-color .2s,background .2s,color .2s}
+.ghost:hover{background:var(--cream);color:var(--ink);border-color:var(--cream)}
+.rv{opacity:0;transform:translateY(30px);transition:opacity .8s var(--ease),transform .8s var(--ease)}
+.rv.in{opacity:1;transform:none}
+
+/* past hij? */
+.fit-grid{display:grid;grid-template-columns:minmax(0,.85fr) minmax(0,1.15fr);gap:clamp(32px,5vw,80px);align-items:center}
+.ceil{display:flex;align-items:stretch;border:1.5px solid rgba(247,237,209,.35);border-radius:18px;max-width:420px;margin-top:32px;overflow:hidden}
+.ceil button{width:68px;background:none;border:0;color:var(--cream);font:800 34px/1 var(--cond);transition:background .15s}
+.ceil button:hover{background:rgba(247,237,209,.08)}
+.ceil .v{flex:1;display:flex;align-items:baseline;justify-content:center;gap:6px;border-left:1.5px solid rgba(247,237,209,.2);border-right:1.5px solid rgba(247,237,209,.2);padding:12px 0 8px}
+.ceil .v b{font:900 66px/.9 var(--cond)}
+.ceil .v small{font:700 20px/1 var(--cond);color:var(--faint)}
+.range{width:100%;max-width:420px;appearance:none;height:4px;background:linear-gradient(90deg,var(--cream) var(--p,27%),rgba(247,237,209,.18) var(--p,27%));border-radius:2px;margin:24px 0 6px}
+.range::-webkit-slider-thumb{appearance:none;width:28px;height:28px;border-radius:50%;background:var(--red);border:3px solid var(--cream);cursor:grab}
+.range::-moz-range-thumb{width:22px;height:22px;border-radius:50%;background:var(--red);border:3px solid var(--cream)}
+.homes{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px}
+.homes button{background:rgba(247,237,209,.05);border:1.5px solid rgba(247,237,209,.2);border-radius:99px;color:var(--cream);padding:9px 14px;font:600 14px/1.1 var(--sans);transition:border-color .15s}
+.homes button:hover{border-color:rgba(247,237,209,.5)}
+.homes button small{color:var(--faint);margin-left:5px}
+.homes button[aria-pressed=true]{background:var(--cream);color:var(--ink);border-color:var(--cream)}
+.homes button[aria-pressed=true] small{color:rgba(20,18,18,.55)}
+.verdict{margin-top:34px;display:grid;gap:14px;justify-items:start}
+.verdict .big{font:900 clamp(36px,3.6vw,56px)/1 var(--cond);text-transform:uppercase}
+.verdict .big em{font-style:normal;color:var(--red-hi)}
+.verdict p{color:var(--mute);font-size:16px;max-width:30em}
+.room{border-radius:26px;position:relative;overflow:hidden;box-shadow:0 40px 90px -40px rgba(0,0,0,.8)}
+
+.room .gap{position:absolute;right:18px;top:18px;font:800 18px/1 var(--cond);text-transform:uppercase;letter-spacing:.02em;padding:8px 12px;border-radius:99px;background:var(--green);color:var(--cream)}
+.room .gap.bad{background:var(--red)}
+/* the photographic room */
+.room img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transform:scale(1.04);transition:opacity .6s var(--ease),transform 1.2s var(--ease)}
+.room img.on{opacity:1;transform:none}
+.rtag{position:absolute;left:18px;bottom:20px;z-index:5;font-size:clamp(20px,2vw,28px)}
+.room{aspect-ratio:3/4;background:#1a2a1f;max-height:min(80vh,820px);margin-inline:auto;width:min(100%,calc(min(80vh,820px) * .75))}
+
+
+
+
+
+
+.room .gap{z-index:5}
+.chips button.no{opacity:.4}
+.chips button.no b{text-decoration:line-through;text-decoration-thickness:2px}
+
+/* bezorging */
+.dl-grid{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,.95fr);gap:clamp(32px,5vw,90px);align-items:center}
+.pcbig{display:flex;align-items:flex-end;gap:18px;flex-wrap:wrap;margin-top:34px}
+.pcbig input{width:4.4ch;box-sizing:content-box;font:900 clamp(72px,8.6vw,132px)/1 var(--cond);background:none;color:var(--cream);border:0;border-bottom:4px solid var(--cream);padding:0 6px;letter-spacing:.06em;border-radius:0}
+.pcbig input::placeholder{color:rgba(247,237,209,.16)}
+.pcbig input:focus-visible{outline:none;border-color:var(--red-hi)}
+.pcbig label{font:600 15px/1.35 var(--sans);color:var(--faint);padding-bottom:14px}
+.pcres{margin-top:28px;min-height:7em}
+.pcres .ok{font:900 clamp(42px,4.8vw,72px)/.95 var(--cond);text-transform:uppercase}
+.pcres .ok em{font-style:normal;color:var(--red-hi)}
+.pcres p{margin-top:12px;font-size:17px;color:var(--mute);max-width:30em}
+.pickup{margin-top:30px;padding-top:22px;border-top:1px solid var(--ring);display:grid;gap:6px;max-width:34em}
+.pickup b{font:800 22px/1 var(--cond);text-transform:uppercase}
+.pickup span{color:var(--mute);font-size:16px}
+.receipt{background:var(--cream);color:var(--ink);padding:32px 30px 42px;font:400 15px/1.55 var(--mono);transform:rotate(1.6deg);--z:10px;
+  -webkit-mask:conic-gradient(from -45deg at bottom,#0000,#000 1deg 89deg,#0000 90deg) bottom/var(--z) 51% repeat-x,linear-gradient(#000 0 0) top/100% calc(100% - var(--z)*.5) no-repeat;mask:conic-gradient(from -45deg at bottom,#0000,#000 1deg 89deg,#0000 90deg) bottom/var(--z) 51% repeat-x,linear-gradient(#000 0 0) top/100% calc(100% - var(--z)*.5) no-repeat}
+.receipt h3{font:500 14px/1 var(--mono);text-align:center;letter-spacing:.16em;text-transform:uppercase}
+.receipt .sub{text-align:center;color:rgba(20,18,18,.55);font-size:12px;margin:6px 0 16px;border-bottom:2px dashed var(--ink);padding-bottom:14px}
+.receipt .ln{display:flex;gap:8px;align-items:baseline;padding:4px 8px;margin:0 -8px;transition:background .3s}
+.receipt .ln i{flex:1;border-bottom:2px dotted #b3aa93;transform:translateY(-4px)}
+.receipt .ln.hit{background:#ffe7a0}
+.receipt .end2{border-top:2px dashed var(--ink);margin-top:12px;padding-top:12px;text-align:center;font-size:12px;color:rgba(20,18,18,.55)}
+.days{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:6px;margin-top:30px}
+.days div{background:rgba(247,237,209,.06);text-align:center;padding:10px 0 9px;line-height:1.1;border-radius:12px}
+.days small{display:block;font:600 12px/1.2 var(--sans);color:var(--faint)}
+.days b{font:900 26px/1.05 var(--cond)}
+.days div:first-child{background:var(--red)}
+.days div:first-child small{color:#ffd9d4}
+.cap2{font:500 13px/1.4 var(--sans);color:var(--faint);margin-top:12px}
+
+/* reviews */
+.rv-head{display:flex;justify-content:space-between;align-items:flex-end;gap:30px;flex-wrap:wrap;margin-bottom:clamp(40px,5vw,70px)}
+.rv-head .lede{margin-top:0;max-width:24em}
+.notes{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:22px;align-items:start}
+.note{background:var(--cream);color:var(--ink);border-radius:16px;padding:22px 22px 20px;transform:rotate(var(--r));transition:transform .4s var(--spring),box-shadow .3s;box-shadow:0 24px 50px -28px rgba(0,0,0,.8)}
+.note:nth-child(even){margin-top:34px}
+.note:hover{transform:rotate(0) translateY(-6px);box-shadow:0 34px 60px -26px rgba(0,0,0,.9)}
+.note .st{color:var(--red);letter-spacing:.12em;font-size:15px}
+.note p{font:500 16px/1.45 var(--sans);margin:10px 0 14px}
+.note p mark{background:linear-gradient(transparent 58%,#ffd36b 58%);color:inherit;padding:0 1px}
+.note b{font:800 16px/1 var(--cond);text-transform:uppercase;letter-spacing:.05em;color:rgba(20,18,18,.55)}
+
+/* zakelijk */
+.biz-grid{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,.95fr);gap:clamp(32px,5vw,90px);align-items:center}
+.bizph{position:relative;margin:0 0 60px}
+.bizph img{width:100%;aspect-ratio:4/3;object-fit:cover;border-radius:26px}
+.bizph .sm{position:absolute;right:-6%;bottom:-60px;width:42%;aspect-ratio:4/3;border-radius:18px;box-shadow:0 30px 60px -20px rgba(0,0,0,.85);outline:6px solid var(--night)}
+.mini{margin:26px 0 30px;padding-left:18px;border-left:3px solid var(--red);font:500 17px/1.5 var(--sans);color:rgba(247,237,209,.85);max-width:32em}
+.mini b{display:block;margin-top:8px;font:800 15px/1 var(--cond);letter-spacing:.06em;text-transform:uppercase;color:var(--faint)}
+
+/* vragen */
+.faq-grid{display:grid;grid-template-columns:minmax(0,.75fr) minmax(0,1.25fr);gap:clamp(32px,5vw,90px);align-items:start}
+.qa{border-top:1px solid var(--ring)}
+.qa details{border-bottom:1px solid var(--ring)}
+.qa summary{list-style:none;cursor:pointer;display:flex;justify-content:space-between;gap:20px;padding:22px 0;font:800 clamp(22px,2vw,28px)/1.1 var(--cond);text-transform:uppercase;letter-spacing:.01em}
+.qa summary::-webkit-details-marker{display:none}
+.qa summary i{font:800 30px/1 var(--cond);font-style:normal;color:var(--red-hi);transition:transform .25s var(--spring)}
+.qa details[open] summary i{transform:rotate(45deg)}
+.qa p{padding:0 0 22px;max-width:36em;color:var(--mute)}
+
+/* the sign */
+.plaid{background-color:var(--red);background-image:linear-gradient(90deg,rgba(20,18,18,.62) 50%,transparent 50%),linear-gradient(rgba(20,18,18,.62) 50%,transparent 50%);background-size:72px 72px}
+.sign{padding:clamp(100px,14vw,190px) var(--gut);text-align:center}
+.sign .stack{align-items:center;font-size:clamp(50px,8.6vw,150px)}
+.sign .stack .stk:nth-child(2){margin-left:.5em}
+.sign .go{margin-top:42px;display:flex;justify-content:center;align-items:center;gap:16px;flex-wrap:wrap}
+.sign .btn{background:var(--ink)}
+.sign .btn:hover{background:#000}
+.sign .note{background:var(--cream);color:var(--ink);padding:10px 14px;border-radius:99px;font:600 14px/1 var(--sans)}
+
+/* mobile buy bar */
+.buybar{position:fixed;left:0;right:0;bottom:0;z-index:45;background:rgba(11,21,15,.92);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-top:1px solid var(--ring);padding:10px 16px calc(10px + env(safe-area-inset-bottom));display:none;align-items:center;gap:14px;transform:translateY(110%);transition:transform .3s var(--ease)}
+.buybar.on{transform:none}
+.buybar .bb{flex:1;min-width:0;line-height:1.2}
+.buybar .bb b{display:block;font:900 22px/1 var(--cond);text-transform:uppercase}
+.buybar .bb span{font:500 12px/1.3 var(--sans);color:var(--mute);display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.buybar .btn{padding:14px 18px 13px;font-size:18px}
+
+@media (max-width:1060px){.notes{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:820px){
+  .fit-grid,.dl-grid,.biz-grid,.faq-grid{grid-template-columns:minmax(0,1fr)}
+  .receipt{transform:none}
+  .notes{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;gap:14px;margin:0 calc(var(--gut) * -1);padding:10px var(--gut) 30px;scrollbar-width:none}
+  .notes::-webkit-scrollbar{display:none}
+  .note{flex:0 0 78%;scroll-snap-align:center}
+  .note:nth-child(even){margin-top:0}
+  .bizph .sm{right:-2%;width:46%}
+  .buybar{display:flex}
+  body:has(.buybar.on) .tuki{bottom:84px}
+  .days b{font-size:21px}
+  .h2{font-size:clamp(40px,11vw,64px)}
+  .sign .stack{font-size:clamp(30px,9.4vw,60px)}
+  .pcbig input{font-size:clamp(64px,20vw,96px)}
+}
+
+@media (prefers-reduced-motion:reduce){
+  .hero .ph .base{animation:none;filter:brightness(.78)} .hero .ph .lit{animation:none;opacity:1}
+  .ticket,.cue{animation:none;opacity:1}
+  .slap .stk{opacity:1;transform:rotate(var(--r,-2deg));transition:none}
+  .dot,.cue i{animation:none}
+  .wall img{transition:none}
+}
+
+@media (max-width:1060px){.nav{display:none}.tr{margin-left:auto}}
+@media (max-width:820px){
+  body{font-size:16px}
+  .brand b{display:none}.brand img{width:44px;height:44px}
+  .hero{display:block;min-height:0}
+  .hero .ph{position:relative;inset:auto;height:60svh}
+  .hero .ph img{object-position:50% 30%}
+  .hero .ph .lit{-webkit-mask:radial-gradient(ellipse 40% 42% at 50% 38%,#000 35%,transparent 100%);mask:radial-gradient(ellipse 40% 42% at 50% 38%,#000 35%,transparent 100%)}
+  .hero::after{height:60svh;background:linear-gradient(0deg,var(--night) 0%,rgba(11,21,15,0) 30%)}
+  .hero .wrap{display:block;padding-top:0;padding-bottom:40px;margin-top:-10svh;position:relative}
+  .copy{width:auto}
+  .hero h1{font-size:clamp(56px,16vw,92px)}
+  .chips{grid-template-columns:repeat(4,minmax(0,1fr));row-gap:12px}
+  .t-foot{grid-template-columns:auto 1fr;row-gap:14px}
+  .t-foot .btn{grid-column:1/-1}
+  .price{font-size:46px}
+  .cue{display:none}
+  .grid{grid-template-columns:minmax(0,1fr);padding:0;align-items:stretch}
+  .win{position:absolute;inset:0;height:100%;width:100%;aspect-ratio:auto;border-radius:0;box-shadow:none;z-index:-1}
+  .win::after{content:"";position:absolute;inset:0;opacity:1;background:linear-gradient(0deg,rgba(11,21,15,.92) 0%,rgba(11,21,15,.5) 38%,rgba(11,21,15,0) 62%),linear-gradient(180deg,rgba(11,21,15,.6),transparent 22%)}
+  .amb{display:none}
+  .txt{position:absolute;inset:auto 18px 122px 18px;min-height:0;height:46svh}
+  .ch{top:auto;bottom:0;transform:none}
+  .ch h2{font-size:clamp(36px,10.6vw,64px)}
+  .ch p{margin-top:18px;font-size:16px}
+  .route{bottom:68px;left:18px;right:18px}
+  .stops{font-size:12px;letter-spacing:.03em}
+  .wall{grid-template-columns:repeat(7,1fr)}
+  .end{background:radial-gradient(ellipse 80% 46% at 50% 50%,rgba(11,21,15,.95) 0,rgba(11,21,15,.85) 60%,rgba(11,21,15,.3) 100%);padding:0 18px}
+  .quote{font-size:16px}
+  .end .stack{font-size:clamp(40px,11.4vw,64px)}
+  .tuki{font-size:11px}
+}
+</style>
+</head>
+<body>
+<header class="top" id="top">
+  <a class="brand" href="#" aria-label="Kerstboomboer, naar boven"><img src="img/logo.png" alt=""><b>Kerstboomboer</b></a>
+  <nav class="nav" aria-label="Hoofdmenu">
+    <a href="#kies" data-en="Trees">Bomen</a>
+    <a href="#reis" data-en="Field to living room">Van veld tot woonkamer</a>
+    <a href="#bezorging" data-en="Delivery">Bezorging</a>
+    <a href="#zakelijk" data-en="Business">Zakelijk</a>
+  </nav>
+  <div class="tr">
+    <button class="lang" id="lang" aria-label="Switch to English">EN</button>
+    <button class="cartbtn" id="cartbtn" aria-label="Open mandje"><span data-en="Basket">Mandje</span><span class="c num" id="count">0</span></button>
+  </div>
+</header>
+
+<main>
+<!-- 1. FIRST SCREEN -->
+<section class="hero" aria-labelledby="h1">
+  <div class="ph" aria-hidden="true">
+    <picture><source media="(max-width:820px)" srcset="img/hero-hoog.jpg"><img class="base" src="img/hero-breed.jpg" alt=""></picture>
+    <picture><source media="(max-width:820px)" srcset="img/hero-hoog.jpg"><img class="lit" src="img/hero-breed.jpg" alt=""></picture>
+  </div>
+  <div class="wrap">
+    <div class="copy" id="kies">
+      <p class="live" aria-live="polite"><span class="dot" aria-hidden="true"></span><span id="liveline" data-check="seizoensdata">…</span></p>
+      <h1 id="h1" class="stack slap"><span class="sr" data-en="Nordmann Christmas trees, delivered: ">Nordmann kerstbomen, bezorgd: </span><span class="stk" data-en="Full right">Vol tot</span><span class="stk c" data-en="to the top.">in de piek.</span></h1>
+      <p class="lede" data-en="Nordmann firs we picked ourselves in Denmark. Cut straight, carried all the way into your living room. Amsterdam and The Hague.">Nordmann, zelf uitgezocht in Denemarken. Recht afgezaagd en tot in je woonkamer gedragen. Amsterdam en Den Haag.</p>
+
+      <div class="ticket" role="group" aria-label="Kies je boom">
+        <div class="t-head"><b data-en="Pick your size">Kies je maat</b>
+          <div class="seg" role="group" aria-label="Soort boom" id="kind"><button data-kind="cut" aria-pressed="true" data-en="Cut">Gezaagd</button><button data-kind="pot" aria-pressed="false" data-en="Potted">In pot</button></div></div>
+        <div class="chips" id="chips" role="radiogroup" aria-label="Maat"></div>
+        <p class="rule" id="rule" data-en="Rule of thumb: your ceiling minus 20 cm, for the stand and the star.">Vuistregel: je plafond min 20 cm, voor de voet en de piek.</p>
+        <div class="t-foot">
+          <div class="price num" id="price" aria-live="polite">€70</div>
+          <div class="when" id="when" aria-live="polite">…</div>
+          <button class="btn" id="add"><span id="addl">In mandje</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <a class="cue" href="#reis"><span data-en="Field to living room">Van veld tot woonkamer</span><i aria-hidden="true"></i></a>
+</section>
+
+<!-- 2. VAN VELD TOT WOONKAMER -->
+<section class="journey" id="reis" aria-label="Van veld tot woonkamer">
+  <div class="stage" id="stage">
+    <div class="amb" aria-hidden="true">
+      <img src="img/veld-11.jpg" alt="" class="on"><img src="img/team-01.jpg" alt=""><img src="img/logistiek-05.jpg" alt=""><img src="img/logistiek-06.jpg" alt=""><img src="img/kamer-320.jpg" alt=""><img src="img/kamer-270.jpg" alt="">
+    </div>
+    <div class="grid">
+      <div class="txt">
+        <article class="ch on"><p class="n"><i></i>01 · <span data-en="Denmark, spring">Denemarken, voorjaar</span></p>
+          <h2 class="stack slap"><span class="stk c">Straight outta</span><span class="stk" data-en="Denmark.">Denemarken.</span></h2>
+          <p data-en="Your tree starts here, on our fields in Denmark. We walk them every spring.">Hier begint jouw boom: op onze velden in Denemarken. Elk voorjaar lopen we ze af.</p></article>
+        <article class="ch"><p class="n"><i></i>02 · <span data-en="Measured and tagged">Meten en merken</span></p>
+          <h2 class="stack slap"><span class="stk" data-en="Picky?">Kieskeurig?</span><span class="stk c" data-en="Yes.">Ja.</span></h2>
+          <p data-en="We check the shape, how full the needles are and how healthy the tree is. Only the good ones get our ribbon. The rest stays in the ground.">We letten op de vorm, hoe vol de naalden staan en hoe gezond hij is. Alleen de mooie krijgen ons lintje. De rest blijft staan.</p></article>
+        <article class="ch"><p class="n"><i></i>03 · <span data-en="Cut and netted">Zagen en netten</span></p>
+          <h2 class="stack slap"><span class="stk c" data-en="Cut straight.">Recht afgezaagd.</span><span class="stk" data-en="Into the net.">In het net.</span></h2>
+          <p data-en="Cut straight, so it stands in the stand first time. Netted, so it reaches you without a broken branch.">Recht afgezaagd, zodat hij in één keer in de voet staat. In het net, zodat hij zonder geknakte tak bij je aankomt.</p></article>
+        <article class="ch"><p class="n"><i></i>04 · <span data-en="On the road">Onderweg</span></p>
+          <h2 class="stack slap"><span class="stk" data-en="Fully loaded.">Vol geladen.</span><span class="stk c" data-en="On our way.">Op weg.</span></h2>
+          <p data-en="To Amsterdam and The Hague. Order before 3 pm and we're at your door tomorrow.">Naar Amsterdam en Den Haag. Voor 15:00 besteld, morgen staan we voor je deur.</p></article>
+        <article class="ch"><p class="n"><i></i>05 · <span data-en="Your stairs">Jouw trap</span></p>
+          <h2 class="stack slap"><span class="stk c" data-en="Third floor?">Drie hoog?</span><span class="stk" data-en="No lift?">Geen lift?</span><span class="stk c" data-en="No problem.">Geen probleem.</span></h2>
+          <p data-en="We carry it in, up the stairs, and take the net off. You just point where it goes.">Wij dragen hem naar binnen, de trap op, en halen het net eraf. Jij wijst alleen waar hij komt.</p></article>
+        <article class="ch"><p class="n"><i></i>06 · <span data-en="Your living room">Jouw woonkamer</span></p>
+          <h2 class="stack slap"><span class="stk c" data-en="Lights on.">Lampjes aan.</span><span class="stk" data-en="Done.">Klaar.</span></h2>
+          <p data-en="And then it stays beautiful. Six weeks, at least. Longer than your New Year's resolutions." data-check="6 weken">En dan blijft hij mooi. Zes weken, minimaal. Langer dan je goede voornemens.</p></article>
+      </div>
+      <div class="win" id="win">
+        <video data-src="vid/video-01.mp4" muted loop playsinline preload="none" poster="img/veld-11.jpg" class="on" aria-label="Lopen tussen de rijen op het veld in Denemarken"></video>
+        <video data-src="vid/video-03.mp4" muted loop playsinline preload="none" poster="img/team-01.jpg" aria-label="Een boom wordt gemeten en gemerkt"></video>
+        <img src="img/logistiek-05.jpg" alt="Ingepakte bomen in netten, klaar voor de rit" loading="lazy">
+        <img src="img/logistiek-06.jpg" alt="Een bus vol ingepakte bomen" loading="lazy">
+        <img src="img/kamer-320.jpg" alt="Een Nordmann in een Amsterdams grachtenpand" loading="lazy">
+        <img src="img/kamer-270.jpg" alt="Een verlichte Nordmann in een jaren-30 woonkamer" loading="lazy">
+      </div>
+    </div>
+    <div class="route" aria-hidden="true">
+      <div class="bar"><div class="fill" id="fill"></div>
+        <svg class="tree" id="rtree" viewBox="0 0 22 28"><path d="M11 0l5 7h-3l5 7h-3l6 9H1l6-9H4l5-7H6z" fill="currentColor"/><rect x="9.5" y="23" width="3" height="5" fill="currentColor"/></svg></div>
+      <div class="stops" id="stops"><span class="on" data-en="Field">Veld</span><span data-en="Tagging">Merken</span><span data-en="Net">Net</span><span data-en="Drive">Rit</span><span data-en="Stairs">Trap</span><span data-en="Home">Thuis</span></div>
+    </div>
+    <div class="wall" id="wall" aria-hidden="true"></div>
+    <div class="end" id="end">
+      <div>
+        <h2 class="stack slap" id="endh"><span class="stk" data-en="You're">Jij bent</span><span class="stk c" data-en="next.">de volgende.</span></h2>
+        <p class="quote"><span class="stars" aria-label="5 sterren">★★★★★</span><span data-en="“Thank you so much for the two beautiful trees and the friendly service, really appreciated! Merry Christmas!”">“Super veel dank voor de twee mooie bomen en de vriendelijke service, zeer gewaardeerd! Fijne kerst!”</span><b>Maaike · Amsterdam Centrum</b></p>
+        <div class="go"><a class="btn" href="#top" id="endgo"><span data-en="Pick your tree">Kies je boom</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" aria-hidden="true"><path d="M12 19V5M6 11l6-6 6 6"/></svg></a><small id="endday">…</small></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 3. PAST HIJ? one scale drawing in centimetres, shared with the ticket at the top -->
+<section class="sec" id="past-hij" aria-labelledby="fit-h">
+  <div class="wrap fit-grid">
+    <div>
+      <h2 class="h2 stack slap" id="fit-h"><span class="stk" data-en="Will it">Past</span><span class="stk c" data-en="fit?">hij?</span></h2>
+      <p class="lede rv" data-en="Measure floor to ceiling. We keep 20 cm free for the stand and the star, and pick the size for you.">Meet van vloer tot plafond. Wij houden 20 cm vrij voor de voet en de piek, en kiezen de maat voor je.</p>
+      <div class="ceil rv" role="group" aria-label="Plafondhoogte">
+        <button id="minus" aria-label="5 centimeter lager">−</button>
+        <div class="v num"><b id="ceilv">260</b><small>cm</small></div>
+        <button id="plus" aria-label="5 centimeter hoger">+</button>
+      </div>
+      <input class="range" id="ceil" type="range" min="200" max="420" step="5" value="260" aria-label="Plafondhoogte in centimeter">
+      <div class="homes rv" id="homes" role="group" aria-label="Snel kiezen" data-check="plafondhoogtes: richtwaarden"></div>
+      <div class="verdict rv" aria-live="polite">
+        <div class="big" id="vbig">…</div>
+        <p id="vsub">…</p>
+        <a class="ghost" href="#kies" id="pickIt" data-en="Take this one ↑">Deze wordt het ↑</a>
+      </div>
+    </div>
+    <div class="room rv" id="room" data-check="kamerfoto's: met Higgsfield gemaakt, zijn eigen boom als voorbeeld; maattabel 2,40 m?">
+        <img data-c="240" src="img/kamer-240.jpg" alt="Een Nordmann van 175–200 cm met lampjes in een nieuwbouwwoonkamer met een plafond van 2,40 m" class="on">
+        <img data-c="270" src="img/kamer-270.jpg" alt="Een Nordmann van 200–225 cm in een jaren-30 woonkamer met een plafond van 2,70 m" loading="lazy">
+        <img data-c="320" src="img/kamer-320.jpg" alt="Een Nordmann van 250–300 cm in een Amsterdams grachtenpand met een plafond van 3,20 m" loading="lazy">
+        <img data-c="400" src="img/kamer-400.jpg" alt="Een Nordmann van 300–350 cm in een loft met een plafond van 4 meter" loading="lazy">
+        <span class="gap" id="gap">…</span>
+        <div class="rtag stack" aria-hidden="true"><span class="stk c" id="rtagC">Plafond 2,40 m</span><span class="stk" id="rtagT">Boom 175–200 cm</span></div>
+        <p class="sr" id="roomsr"></p>
+      </div>
+  </div>
+</section>
+
+<!-- 4. KOMEN WE BIJ JOU? -->
+<section class="sec" id="bezorging" aria-labelledby="dl-h">
+  <div class="wrap dl-grid">
+    <div>
+      <h2 class="h2 stack slap" id="dl-h"><span class="stk c" data-en="Do we come">Komen we</span><span class="stk" data-en="to you?">bij jou?</span></h2>
+      <p class="lede rv" data-en="Type your postcode. You'll see the day we're there and what it costs, straight away.">Tik je postcode. Je ziet meteen welke dag we er zijn en wat het kost.</p>
+      <div class="pcbig rv">
+        <input id="pc" inputmode="numeric" maxlength="4" placeholder="1017" autocomplete="postal-code" aria-describedby="pcres" aria-label="Postcode, 4 cijfers">
+        <label for="pc" data-en="Four digits is enough.">Vier cijfers is genoeg.</label>
+      </div>
+      <div class="pcres" id="pcres" aria-live="polite"></div>
+      <div class="pickup rv"><b data-en="Rather pick it up?">Liever zelf ophalen?</b><span data-en="Drive-through at Sloterdijk: drive in, point at your tree, we load it. You don't even get out." data-check="adres en openingstijden">Drive-through in Sloterdijk: rij erin, wijs je boom aan, wij laden hem in. Je hoeft niet eens uit te stappen.</span></div>
+    </div>
+    <div class="rv">
+      <div class="receipt" id="receipt">
+        <h3 data-en="Delivery">Bezorging</h3>
+        <div class="sub" data-en="into your living room · per address">tot in de woonkamer · per adres</div>
+        <div class="ln" data-max="125"><span data-en="tree up to 125 cm">boom tot 125 cm</span><i></i><b class="num">€9,95</b></div>
+        <div class="ln" data-max="225"><span data-en="tree up to 225 cm">boom tot 225 cm</span><i></i><b class="num">€10,95</b></div>
+        <div class="ln" data-max="275"><span data-en="tree up to 275 cm">boom tot 275 cm</span><i></i><b class="num">€14,95</b></div>
+        <div class="ln" data-max="999"><span data-en="anything taller">alles daarboven</span><i></i><b class="num">€16,95</b></div>
+        <div class="ln"><span data-en="each extra tree">elke extra boom</span><i></i><b class="num">+ €2,95</b></div>
+        <div class="ln"><span data-en="stairs, lifting, net off">trappen, tillen, net eraf</span><i></i><b data-en="included">inbegrepen</b></div>
+        <div class="end2" data-en="thank you · mind the needles">dank je wel · pas op de naalden</div>
+      </div>
+      <div class="days" id="days" aria-label="Eerstvolgende bezorgdagen"></div>
+      <p class="cap2" id="dcap">…</p>
+    </div>
+  </div>
+</section>
+
+<!-- 5. REVIEWS: his real ones, from kerstboomboer.nl -->
+<section class="sec" id="reviews" aria-labelledby="rv-h">
+  <div class="wrap">
+    <div class="rv-head">
+      <h2 class="h2 stack slap" id="rv-h"><span class="stk c" data-en="We're">Wij zijn</span><span class="stk c" data-en="modest.">bescheiden.</span><span class="stk" data-en="They're not.">Zij niet.</span></h2>
+      <p class="lede rv" data-en="Real reviews from real customers, straight from kerstboomboer.nl. Not edited, just shortened.">Echte reviews van echte klanten, zo van kerstboomboer.nl. Niets aan veranderd, alleen ingekort.</p>
+    </div>
+    <div class="notes" id="notes"></div>
+  </div>
+</section>
+
+<!-- 6. ZAKELIJK -->
+<section class="sec" id="zakelijk" aria-labelledby="biz-h">
+  <div class="wrap biz-grid">
+    <figure class="bizph rv" data-check="zijn eigen kantoor- en restaurantfoto, opgeknapt met Higgsfield"><img src="img/biz-kantoor.jpg" alt="Een versierde, verlichte Nordmann in een kantoor met witte balken" loading="lazy"><img class="sm" src="img/biz-restaurant.jpg" alt="Een versierde Nordmann bij de ingang van een restaurant met een rood-wit gestreepte luifel" loading="lazy"></figure>
+    <div>
+      <h2 class="h2 stack slap" id="biz-h"><span class="stk" data-en="Lobby of">Lobby van</span><span class="stk c" data-en="four metres?">vier meter?</span></h2>
+      <p class="lede rv" data-en="Offices, hotels and restaurants all over the Randstad: delivered, placed, lights on if you like, and gone again in January." data-check="lampjes, ophalen in januari">Kantoren, hotels en restaurants in heel de Randstad: bezorgd, neergezet, lampjes erin als je wilt, en in januari weer weg.</p>
+      
+      <a class="ghost rv" href="mailto:info@kerstboomboer.nl?subject=Zakelijke%20offerte" data-en="Ask for a quote →">Offerte aanvragen →</a>
+    </div>
+  </div>
+</section>
+
+<!-- 7. VRAGEN -->
+<section class="sec" id="vragen" aria-labelledby="faq-h">
+  <div class="wrap faq-grid">
+    <h2 class="h2 stack slap" id="faq-h"><span class="stk c" data-en="Before">Voor je</span><span class="stk" data-en="you ask.">het vraagt.</span></h2>
+    <div class="qa rv">
+      <details><summary><span data-en="What does delivery cost?">Wat kost bezorgen?</span><i aria-hidden="true">+</i></summary><p data-en="€9.95 up to 125 cm, €10.95 up to 225 cm, €14.95 up to 275 cm, €16.95 above that. Each extra tree to the same address: + €2.95. Stairs and lifting included.">€9,95 tot 125 cm, €10,95 tot 225 cm, €14,95 tot 275 cm, €16,95 daarboven. Elke extra boom naar hetzelfde adres: + €2,95. Trappen en tillen zitten erbij.</p></details>
+      <details><summary><span data-en="When do you deliver?">Wanneer bezorgen jullie?</span><i aria-hidden="true">+</i></summary><p data-check="seizoensdata" data-en="From 23 November, every day until Christmas. Order before 3 pm and it arrives the next day, or pick another day at checkout.">Vanaf 23 november, elke dag tot kerst. Voor 15:00 besteld is morgen in huis, of kies een andere dag bij het afrekenen.</p></details>
+      <details><summary><span data-en="Why a Nordmann?">Waarom een Nordmann?</span><i aria-hidden="true">+</i></summary><p data-en="Soft needles that don't prick and stay on. Full to the top, and good for six weeks at least.">Zachte naalden die niet prikken en blijven zitten. Vol tot in de piek, en minimaal zes weken mooi.</p></details>
+      <details><summary><span data-en="How do I unpack it?">Hoe pak ik hem uit?</span><i aria-hidden="true">+</i></summary><p data-check="uitpakadvies" data-en="Let it get used to the warmth for a night in the hallway. Then cut the net from the bottom up; the branches settle within a few hours.">Laat hem eerst een nacht in de gang wennen. Knip dan het net van onder naar boven open; de takken zakken binnen een paar uur op hun plek.</p></details>
+      <details><summary><span data-en="How do I keep it green?">Hoe blijft hij mooi?</span><i aria-hidden="true">+</i></summary><p data-en="Water. A lot, especially the first days: a fresh cut drinks up to two litres a day. Keep it away from the radiator.">Water. Veel, vooral de eerste dagen: een vers gezaagde boom drinkt tot twee liter per dag. Niet naast de verwarming.</p></details>
+      <details><summary><span data-en="What is an Easyfix stand?">Wat is een Easyfix-standaard?</span><i aria-hidden="true">+</i></summary><p data-check="Easyfix: prijs en uitleg" data-en="A stand your tree stands straight in, first time. Add it in your basket, from €4.95.">Een voet waar je boom in één keer recht in staat. Kies hem in je mandje, vanaf €4,95.</p></details>
+    </div>
+  </div>
+</section>
+
+<!-- 8. THE SIGN -->
+<section class="sign plaid" aria-label="Bestellen">
+  <div class="stack slap"><span class="stk c" data-en="Order before 3 pm.">Voor 15:00 besteld.</span><span class="stk k" data-en="Here tomorrow.">Morgen in huis.</span></div>
+  <div class="go"><a class="btn" href="#kies" data-en="Pick your tree">Kies je boom</a><span class="note" id="signnote">…</span></div>
+</section>
+
+</main>
+
+<div class="foot-ill" data-check="illustratie: logo-boer met bomen (Higgsfield, nog goedkeuren)"><img src="img/footer-boer.jpg" alt="De boer uit het logo, armen over elkaar, tussen sparren in alle maten, met sneeuw en lichtjes" width="2400" height="1028" loading="lazy"></div>
+<footer><div><b>Kerstboomboer</b><br><span data-en="Nordmann from Denmark · Amsterdam &amp; The Hague">Nordmann uit Denemarken · Amsterdam &amp; Den Haag</span></div><div><a href="mailto:info@kerstboomboer.nl">info@kerstboomboer.nl</a> · <a href="tel:+31658779549">06 58 77 95 49</a><br>KvK 52772519</div><div data-en="Site by TUKI">Site door TUKI</div></footer>
+
+<div class="buybar" id="buybar"><div class="bb"><b id="bbsz">…</b><span id="bbwhen">…</span></div><button class="btn" id="bbadd" data-en="+ Basket">+ Mandje</button></div>
+
+<div class="tuki" role="note"><span><b>TUKI</b> · <span data-en="private preview">privé-voorbeeld</span></span><button id="chk" aria-pressed="false"><span id="chkn">0</span> <span data-en="to check">te checken</span></button></div>
+<div class="scrim" id="scrim"></div>
+<aside class="sheet" id="sheet" role="dialog" aria-modal="true" aria-labelledby="sh-h" aria-hidden="true">
+  <header><h2 id="sh-h" data-en="Your basket">Je mandje</h2><button class="x" id="close" aria-label="Sluiten">×</button></header>
+  <div class="body" id="sbody"></div>
+  <div class="sum" id="ssum"></div>
+</aside>
+<div class="toast" id="toast" role="status"></div>
+
+<script>
+(()=>{
+'use strict';
+const $=s=>document.querySelector(s), $$=s=>[...document.querySelectorAll(s)];
+const RM=matchMedia('(prefers-reduced-motion: reduce)').matches;
+let EN=false; const T=(nl,en)=>EN?en:nl;
+const eur=c=>'€'+(c/100).toLocaleString('nl-NL',{minimumFractionDigits:c%100?2:0,maximumFractionDigits:2});
+
+/* His live WooCommerce catalogue (ids and prices); stand defaults to none here, chosen in the basket later. */
+const CUT=[[70,100,125,3750],[66,125,150,4250],[62,150,175,5500],[58,175,200,7000,1],[50,200,225,8500],[46,250,300,13550],[42,300,350,18500]].map(([id,lo,hi,price,best])=>({id,lo,hi,price,best:!!best}));
+const POT=[[4689,80,100,3500],[4690,100,125,4500],[4691,125,150,5500],[4692,150,175,6500]].map(([id,lo,hi,price])=>({id,lo,hi,price,pot:true}));
+const ALL=[...CUT,...POT], byId=id=>ALL.find(p=>p.id===+id), label=p=>`${p.lo}–${p.hi}`;
+const FEE=(tall,n)=>(tall<=125?995:tall<=225?1095:tall<=275?1495:1695)+295*Math.max(0,n-1);
+
+/* Delivery clock: his site says "we leveren vanaf 23 november". ?nu=2026-12-08T11:20 shows the in-season state. */
+const qs=new URLSearchParams(location.search), t0=performance.now();
+const now=()=>qs.get('nu')?new Date(new Date(qs.get('nu')).getTime()+(performance.now()-t0)):new Date();
+const SEASON=[new Date('2026-11-23T00:00'),new Date('2026-12-23T23:59')];
+const DN=['zo','ma','di','wo','do','vr','za'],DE=['Sun','Mon','Tue','Wed','Thu','Fri','Sat'],MN=['jan','feb','mrt','apr','mei','jun','jul','aug','sep','okt','nov','dec'],ME=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+const dname=d=>EN?`${DE[d.getDay()]} ${d.getDate()} ${ME[d.getMonth()]}`:`${DN[d.getDay()]} ${d.getDate()} ${MN[d.getMonth()]}`;
+function firstDay(t){const d=new Date(t);d.setHours(0,0,0,0);const c=new Date(t);c.setHours(15,0,0,0);d.setDate(d.getDate()+(t<c?1:2));return d<SEASON[0]?new Date(SEASON[0]):d}
+const pre=()=>now()<SEASON[0];
+const pad=n=>String(n).padStart(2,'0');
+function left(){const t=now(),c=new Date(t);c.setHours(15,0,0,0);const l=(t<c?c:new Date(c.getTime()+864e5))-t;return [Math.floor(l/36e5),Math.floor(l%36e5/6e4)]}
+
+/* ---------- first screen ---------- */
+let kind='cut', sel=58, shown=7000, ceil=260, ceilTouched=false;
+const list=()=>kind==='cut'?CUT:POT;
+function renderChips(){
+  $('#chips').className='chips'+(kind==='pot'?' pot':'');
+  $('#chips').innerHTML=list().map(p=>`<button role="radio" data-id="${p.id}" aria-checked="${p.id===sel}" class="${ceilTouched&&!fits(p)?'no':''}" aria-label="${label(p)} cm, ${eur(p.price)}${ceilTouched&&!fits(p)?T(', te hoog voor je plafond',', too tall for your ceiling'):''}">${p.best?`<span class="best">Bestseller</span>`:''}<b class="num">${label(p)}</b><small class="num">${eur(p.price)}</small></button>`).join('');
+}
+function countTo(to){
+  const el=$('#price'), from=shown; shown=to;
+  if(RM||from===to){el.textContent=eur(to);return}
+  const s=performance.now(), f=t=>{if(shown!==to)return;const k=Math.min(1,(t-s)/420);el.textContent=eur(k<1?Math.round((from+(to-from)*(1-Math.pow(1-k,3)))/50)*50:to);if(k<1)requestAnimationFrame(f)};
+  requestAnimationFrame(f); setTimeout(()=>{if(shown===to)el.textContent=eur(to)},500);
+}
+function renderTicket(){
+  const p=byId(sel), f=firstDay(now()), [h,m]=left(), fee=FEE(p.hi,1);
+  $$('#chips button').forEach(b=>b.setAttribute('aria-checked',+b.dataset.id===sel));
+  countTo(p.price);
+  $('#when').innerHTML=pre()
+    ? T(`<b>${label(p)} cm</b>${p.pot?' in pot':''} · eerste bezorgdag <b class="day">${dname(f)}</b><br>Bezorging tot in je woonkamer ${eur(fee)}`,`<b>${label(p)} cm</b>${p.pot?' potted':''} · first delivery day <b class="day">${dname(f)}</b><br>Delivered into your living room ${eur(fee)}`)
+    : T(`<b>${label(p)} cm</b> · <b class="day">${dname(f)}</b> in je woonkamer<br>Bezorging ${eur(fee)} · nog ${h} u ${pad(m)} min`,`<b>${label(p)} cm</b> · in your living room <b class="day">${dname(f)}</b><br>Delivery ${eur(fee)} · ${h} h ${pad(m)} min left`);
+  $('#addl').textContent=T('In mandje','Add to basket');
+  renderFit(); renderZone(); renderReceipt(); renderBuybar();
+}
+$('#chips').addEventListener('click',e=>{const b=e.target.closest('button');if(b){sel=+b.dataset.id;renderTicket()}});
+$('#chips').addEventListener('keydown',e=>{
+  if(!['ArrowLeft','ArrowRight','ArrowUp','ArrowDown'].includes(e.key))return;e.preventDefault();
+  const l=list(),i=l.findIndex(p=>p.id===sel),n=l[(i+(e.key==='ArrowLeft'||e.key==='ArrowUp'?-1:1)+l.length)%l.length];
+  sel=n.id;renderTicket();$(`#chips [data-id="${n.id}"]`).focus();
+});
+$('#kind').addEventListener('click',e=>{const b=e.target.closest('[data-kind]');if(!b||b.dataset.kind===kind)return;kind=b.dataset.kind;
+  $$('#kind button').forEach(x=>x.setAttribute('aria-pressed',x===b));sel=kind==='cut'?58:4691;renderChips();renderTicket()});
+
+/* ---------- basket (this browser only; checkout stays his WooCommerce) ---------- */
+let cart=[],pc='',day=null; try{cart=JSON.parse(localStorage.getItem('kbb-cart7')||'[]')}catch(e){}
+const save=()=>{try{localStorage.setItem('kbb-cart7',JSON.stringify(cart))}catch(e){}};
+const zone=v=>{const n=+v;if(n>=1011&&n<=1109)return'Amsterdam';if(n>=2491&&n<=2597)return'Den Haag';if((n>=1110&&n<=1199)||(n>=1380&&n<=1399)||(n>=2100&&n<=2490))return'near';return null};
+function days(n){const out=[],d=firstDay(now());for(let i=0;i<n&&d<=SEASON[1];i++){out.push(new Date(d));d.setDate(d.getDate()+1)}return out}
+function zoneTxt(){if(pc.length<4)return'';const z=zone(pc);
+  if(z==='Amsterdam'||z==='Den Haag')return`<span style="color:var(--green)">✓ ${z}, ${T('we komen','we deliver')}</span>`;
+  if(z==='near')return`<span style="color:#9a6a00">${T('Net buiten ons gebied: mail ons, vaak kan het.','Just outside our area: mail us, we often can.')}</span>`;
+  return`<span style="color:rgba(20,18,18,.55)">${T('Niet in ons gebied. Ophalen kan bij de drive-through in Sloterdijk.','Not in our area. You can pick up at the Sloterdijk drive-through.')}</span>`}
+function renderCart(){
+  $('#count').textContent=cart.length;
+  if(!cart.length){$('#sbody').innerHTML=`<div class="empty"><div class="stack"><span class="stk">${T('Leeg.','Empty.')}</span></div>${T('Zonde. En zo makkelijk op te lossen.','Sad. And so easy to fix.')}</div>`;$('#ssum').innerHTML='';return}
+  const ds=days(8); if(!day||!ds.some(d=>+d===+day))day=ds[0];
+  $('#sbody').innerHTML=cart.map((id,i)=>{const p=byId(id);return`<div class="line"><div class="th" style="background-image:url(img/p/${p.id}.jpg)"></div><div><b>Nordmann ${label(p)} cm</b><small>${p.pot?T('in pot','potted'):T('gezaagd','cut')}</small><button class="rm" data-rm="${i}">${T('verwijder','remove')}</button></div><div class="rt num">${eur(p.price)}</div></div>`}).join('')+`
+    <div class="field"><label for="spc">Postcode</label><input id="spc" inputmode="numeric" maxlength="4" placeholder="1017" value="${pc}"><div class="zone" id="szone">${zoneTxt()}</div></div>
+    <div class="field"><span class="l">${T('Bezorgdag','Delivery day')}</span><div class="dd">${ds.map(d=>`<button data-day="${+d}" aria-pressed="${+d===+day}"><small>${(EN?DE:DN)[d.getDay()]}</small><b class="num">${d.getDate()}</b><small>${(EN?ME:MN)[d.getMonth()]}</small></button>`).join('')}</div></div>`;
+  const sub=cart.reduce((a,id)=>a+byId(id).price,0), fee=FEE(Math.max(...cart.map(id=>byId(id).hi)),cart.length);
+  $('#ssum').innerHTML=`<div class="r"><span>${T('Bomen','Trees')}</span><span class="num">${eur(sub)}</span></div><div class="r"><span>${T('Bezorging tot in de woonkamer','Delivery into your living room')}</span><span class="num">${eur(fee)}</span></div><div class="r t"><span>${T('Totaal','Total')}</span><span class="num">${eur(sub+fee)}</span></div><button class="btn" id="pay">${T('Afrekenen','Checkout')}</button><div class="handoff">${T('iDEAL en kaart, in de eigen kassa van kerstboomboer.nl','iDEAL and cards, in kerstboomboer.nl’s own checkout')}</div>`;
+}
+let back=null;
+const open=()=>{back=document.activeElement;$('#sheet').classList.add('open');$('#scrim').classList.add('open');$('#sheet').setAttribute('aria-hidden','false');setTimeout(()=>$('#close').focus(),60)};
+const close=()=>{$('#sheet').classList.remove('open');$('#scrim').classList.remove('open');$('#sheet').setAttribute('aria-hidden','true');back?.focus?.()};
+$('#cartbtn').onclick=open;$('#close').onclick=close;$('#scrim').onclick=close;
+addEventListener('keydown',e=>{if(e.key==='Escape'&&$('#sheet').classList.contains('open'))close()});
+$('#sheet').addEventListener('click',e=>{
+  const r=e.target.closest('[data-rm]');if(r){cart.splice(+r.dataset.rm,1);save();renderCart();return}
+  const d=e.target.closest('[data-day]');if(d){day=new Date(+d.dataset.day);$$('#sheet [data-day]').forEach(x=>x.setAttribute('aria-pressed',x===d));return}
+  // Hand-off: WooCommerce accepts ?add-to-cart=<id>; the live build sends every line, the stand and the day.
+  if(e.target.id==='pay')toast(T('Voorbeeld: op de echte site opent hier zijn eigen WooCommerce-kassa, alles al ingevuld.','Prototype: on the live site this opens his own WooCommerce checkout, everything filled in.'));
+});
+$('#sheet').addEventListener('input',e=>{if(e.target.id!=='spc')return;e.target.value=e.target.value.replace(/\D/g,'').slice(0,4);setPc(e.target.value,e.target)});
+$('#add').onclick=()=>{
+  const p=byId(sel);cart.push(p.id);save();renderCart();
+  const c=$('#count');c.classList.remove('pop');void c.offsetWidth;c.classList.add('pop');
+  const b=$('#add');b.classList.add('ok');$('#addl').textContent=T('In je mandje','In your basket');
+  setTimeout(()=>{b.classList.remove('ok');renderTicket()},1500);
+  toast(T(`${label(p)} cm in je mandje. Goeie keus.`,`${label(p)} cm in your basket. Good call.`));
+  if(innerWidth<820)setTimeout(open,400);
+};
+let tt;function toast(m){const t=$('#toast');t.textContent=m;t.classList.add('show');clearTimeout(tt);tt=setTimeout(()=>t.classList.remove('show'),3200)}
+
+/* ---------- van veld tot woonkamer ---------- */
+const J=$('#reis'), chs=$$('.ch'), media=[...$('#win').children].filter(x=>x.matches('video,img')), amb=$$('.amb img'), stops=$$('#stops span');
+const N=6, SEG=N+1.2;              // six chapters, then the wall
+const WALL=['kamer-240','kamer-270','kamer-320','kamer-400','biz-kantoor','biz-restaurant','veld-11','team-01','logistiek-05','logistiek-06','zakelijk-04','zakelijk-18','hero-hoog'];
+$('#wall').innerHTML=Array.from({length:56},(_,i)=>{const c=i%14-6.5,r=Math.floor(i/14)-1.5;return`<img src="img/${WALL[i%WALL.length]}.jpg" alt="" loading="lazy" style="--d:${Math.round(Math.hypot(c,r*2))}">`}).join('');
+let cur=-1, wallOn=false, ticking=false; stops.forEach((el,k)=>el.addEventListener('click',()=>goTo(k)));
+function setChapter(i){
+  if(i===cur)return; cur=i;
+  chs.forEach((c,k)=>{const on=k===i;c.classList.toggle('on',on);const h=c.querySelector('.slap');if(h){h.classList.remove('in');if(on){void h.offsetWidth;h.classList.add('in')}}});
+  media.forEach((m,k)=>{
+    const on=k===i;m.classList.toggle('on',on);
+    if(m.tagName==='VIDEO'){
+      if(Math.abs(k-i)<=1&&!m.src&&m.dataset.src){m.src=m.dataset.src;m.preload='auto'}   // load only the neighbours
+      if(on&&!RM)m.play().catch(()=>{});else m.pause();
+    }
+  });
+  amb.forEach((a,k)=>a.classList.toggle('on',k===i));
+  stops.forEach((s,k)=>s.classList.toggle('on',k<=i));
+}
+function frame(){
+  ticking=false;
+  const r=J.getBoundingClientRect(), total=J.offsetHeight-innerHeight, p=Math.min(1,Math.max(0,-r.top/total)), s=p*SEG;
+  setChapter(Math.min(N-1,Math.floor(s)));
+  const local=Math.min(1,s-Math.min(N-1,Math.floor(s)));
+  if(!RM){ const m=media[cur]; if(m) m.style.transform=`scale(${1.1-.1*Math.min(1,local)})`; }
+  const route=Math.min(1,s/(N-.4));
+  $('#fill').style.width=(route*100)+'%'; $('#rtree').style.left=(route*100)+'%';
+  // the wall arrives after chapter six and switches as a whole: scroll-linked opacity left ghost layers
+  const want=s>N+.15;
+  if(want!==wallOn){wallOn=want;$('#stage').classList.toggle('walled',want);$('#wall').classList.toggle('on',want);$('#end').classList.toggle('on',want);$('#endh').classList.toggle('in',want)}
+  // the blurred backdrop only fades up once the section arrives, so there is no lighter band under the first screen
+  $('.amb').style.opacity=Math.min(1,Math.max(0,1-r.top/innerHeight));
+}
+/* lock-on: inside the pinned journey one scroll gesture = one chapter, and the page waits there.
+   At the first chapter (up) and at the wall (down) the page lets go again. */
+const pos=k=>{const total=J.offsetHeight-innerHeight; return J.offsetTop+total*((k===N?N+.3:k+.05)/SEG)};
+let busy=false, prevY=scrollY;
+const nearest=()=>{let b=0,d=1e9;for(let k=0;k<=N;k++){const x=Math.abs(scrollY-pos(k));if(x<d){d=x;b=k}}return b};
+const inZone=()=>scrollY>=pos(0)-6&&scrollY<=pos(N)+6;
+let lastWheel=0, stepEnd=0;
+function goTo(k){
+  k=Math.max(0,Math.min(N,k)); busy=true;
+  const from=scrollY, to=pos(k), t0=performance.now(), D=RM?0:480;
+  const f=t=>{const q=D?Math.min(1,(t-t0)/D):1; scrollTo(0,from+(to-from)*(1-Math.pow(1-q,3))); if(q<1)requestAnimationFrame(f); else{busy=false;stepEnd=performance.now()}};
+  requestAnimationFrame(f); setTimeout(()=>{if(busy){scrollTo(0,to);busy=false;stepEnd=performance.now()}},D+300);   // background tabs pause rAF
+}
+function stepDir(dir){const k=nearest(); if((dir>0&&k>=N)||(dir<0&&k<=0))return false; if(!busy)goTo(k+dir); return true}
+addEventListener('wheel',e=>{
+  if(!inZone()||!e.deltaY)return;
+  const now=performance.now(), gap=now-lastWheel; lastWheel=now;
+  const k=nearest(), dir=Math.sign(e.deltaY);
+  if((dir>0&&k>=N)||(dir<0&&k<=0))return;
+  e.preventDefault();
+  // the tail of the same trackpad fling keeps firing for a while: it only counts again after a short pause
+  if(busy||(gap<80&&now-stepEnd<700))return;
+  goTo(k+dir);
+},{passive:false});
+addEventListener('keydown',e=>{
+  if(!inZone()||(e.target!==document.body&&e.target!==document.documentElement))return;
+  const d={ArrowDown:1,PageDown:1,' ':e.shiftKey?-1:1,ArrowUp:-1,PageUp:-1}[e.key]; if(d&&stepDir(d))e.preventDefault()
+});
+let ty=0, tdone=false;
+addEventListener('touchstart',e=>{ty=e.touches[0].clientY;tdone=false},{passive:true});
+addEventListener('touchmove',e=>{
+  if(!inZone())return; const dy=ty-e.touches[0].clientY, dir=Math.sign(dy); if(!dir)return;
+  const k=nearest(); if((dir>0&&k>=N)||(dir<0&&k<=0))return;
+  e.preventDefault(); if(!tdone&&Math.abs(dy)>34&&!busy){tdone=true;goTo(k+dir)}
+},{passive:false});
+/* momentum from outside must not carry us past the first chapter or the wall */
+function clampEntry(){
+  const y=scrollY; if(!busy){
+    if(prevY<pos(0)-2&&y>pos(0)+2&&y<pos(N))scrollTo({top:pos(0),behavior:'auto'});
+    else if(prevY>pos(N)+2&&y<pos(N)-2&&y>pos(0))scrollTo({top:pos(N),behavior:'auto'});
+  } prevY=scrollY;
+}
+const onScroll=()=>{ clampEntry(); if(!ticking){ticking=true;requestAnimationFrame(frame)} $('#top').classList.toggle('solid',scrollY>40) };
+addEventListener('scroll',onScroll,{passive:true}); addEventListener('resize',onScroll);
+$('#endgo').addEventListener('click',e=>{e.preventDefault();scrollTo({top:0,behavior:RM?'auto':'smooth'});setTimeout(()=>$(`#chips [data-id="${sel}"]`)?.focus({preventScroll:true}),600)});
+
+/* ---------- past hij? one scale drawing in centimetres, shared with the ticket ---------- */
+const HOMES=[[240,'Nieuwbouw','New build'],[270,'Jaren 30','1930s house'],[320,'Grachtenpand','Canal house'],[400,'Loft','Loft']];
+function fits(p){return p.hi<=ceil-20}
+function bestFor(c){const l=list();return l.filter(p=>p.hi<=c-20).at(-1)||l[0]}
+/* the room: four real-looking rooms made with Higgsfield from his own studio tree, one per ceiling type.
+   The slider shows the room closest to your ceiling; the verdict text always uses your exact number. */
+const ROOMS=[[240,58],[270,50],[320,46],[400,42]];
+function drawRoom(){
+  const [c,id]=ROOMS.reduce((a,b)=>Math.abs(b[0]-ceil)<Math.abs(a[0]-ceil)?b:a), t=byId(id);
+  $$('#room img').forEach(im=>im.classList.toggle('on',+im.dataset.c===c));
+  $('#rtagC').textContent=T(`Plafond ${(c/100).toFixed(2).replace('.',',')} m`,`Ceiling ${(c/100).toFixed(2)} m`);
+  $('#rtagT').textContent=T(`Boom ${label(t)} cm`,`Tree ${label(t)} cm`);
+}
+function renderHomes(){
+  $('#homes').innerHTML=HOMES.map(([c,nl,en])=>`<button data-c="${c}" aria-pressed="${ceilTouched&&ceil===c}">${EN?en:nl}<small class="num">±${(c/100).toFixed(2).replace('.',EN?'.':',')} m</small></button>`).join('');
+}
+function renderFit(){
+  const p=byId(sel), ok=fits(p), room=ceil-p.hi, best=bestFor(ceil);
+  $('#ceilv').textContent=ceil; $('#ceil').value=ceil; $('#ceil').style.setProperty('--p',((ceil-200)/220*100)+'%');
+  $('#ceil').setAttribute('aria-valuetext',ceil+' centimeter');
+  drawRoom();
+  $('#roomsr').textContent=T(`Een boom van ${label(p)} cm onder een plafond van ${ceil} cm.`,`A ${label(p)} cm tree under a ${ceil} cm ceiling.`);
+  $('#gap').classList.toggle('bad',!ok);
+  $('#gap').textContent=ok?T(`Jouw ${ceil} cm: ${room} cm over voor de piek`,`Your ${ceil} cm: ${room} cm left for the star`):T(`Jouw ${ceil} cm: ${-room} cm te hoog`,`Your ${ceil} cm: ${-room} cm too tall`);
+  $('#vbig').innerHTML=ok?T(`Neem <em>${label(p)} cm</em>`,`Take <em>${label(p)} cm</em>`):T(`Kies <em>${label(best)} cm</em>`,`Go for <em>${label(best)} cm</em>`);
+  $('#vsub').textContent=ok
+    ? T(`Bij ${ceil} cm plafond past deze${p.id===best.id?', en groter wordt het niet':''}. ${eur(p.price)}, bezorging ${eur(FEE(p.hi,1))}.`,`With a ${ceil} cm ceiling this one fits${p.id===best.id?', and it doesn’t get any bigger':''}. ${eur(p.price)}, delivery ${eur(FEE(p.hi,1))}.`)
+    : T(`De ${label(p)} cm die je nu kiest, raakt je plafond. Gedurfd, maar nee.`,`The ${label(p)} cm you picked hits your ceiling. Bold, but no.`);
+  $('#pickIt').dataset.best=ok?p.id:best.id;
+  $$('#homes button').forEach(b=>b.setAttribute('aria-pressed',ceilTouched&&+b.dataset.c===ceil));
+}
+function setCeil(v){ceil=Math.max(200,Math.min(420,v));ceilTouched=true;sel=bestFor(ceil).id;renderChips();renderTicket()}
+$('#ceil').addEventListener('input',e=>setCeil(+e.target.value));
+$('#minus').onclick=()=>setCeil(ceil-5); $('#plus').onclick=()=>setCeil(ceil+5);
+$('#homes').addEventListener('click',e=>{const b=e.target.closest('[data-c]');if(b)setCeil(+b.dataset.c)});
+$('#pickIt').addEventListener('click',e=>{e.preventDefault();sel=+e.currentTarget.dataset.best;renderChips();renderTicket();
+  $('#kies').scrollIntoView({behavior:RM?'auto':'smooth',block:'center'});setTimeout(()=>$(`#chips [data-id="${sel}"]`)?.focus({preventScroll:true}),700)});
+
+/* ---------- postcode: one value for the delivery section and the basket ---------- */
+function renderZone(){
+  const r=$('#pcres'); if(!r)return; const z=zone(pc), f=firstDay(now()), p=byId(sel);
+  if(pc.length<4){r.innerHTML='';return}
+  if(z==='Amsterdam'||z==='Den Haag') r.innerHTML=`<div class="ok">${z}.<br><em>${dname(f)}</em> ${T('staan we er.',"we're there.")}</div><p>${T(`Jouw ${label(p)} cm: bezorging ${eur(FEE(p.hi,1))}, tot in je woonkamer. Trappen inbegrepen.`,`Your ${label(p)} cm: delivery ${eur(FEE(p.hi,1))}, into your living room. Stairs included.`)}</p>`;
+  else if(z==='near') r.innerHTML=`<div class="ok">${T('Net buiten','Just outside')}<br><em>${T('de rand.','the edge.')}</em></div><p>${T('Mail ons je adres. Voor een boom als de onze rijden we vaak toch.',"Mail us your address. For a tree like ours we'll often make the trip.")}</p>`;
+  else r.innerHTML=`<div class="ok">${T('Nog niet','Not yet')}<br><em>${T('bij jou.','near you.')}</em></div><p>${T('We bezorgen in Amsterdam en Den Haag. Daarbuiten: haal hem op bij de drive-through in Sloterdijk.','We deliver in Amsterdam and The Hague. Elsewhere: pick it up at the Sloterdijk drive-through.')}</p>`;
+}
+function setPc(v,src){
+  pc=v.replace(/\D/g,'').slice(0,4);
+  for(const id of ['pc','spc']){const el=document.getElementById(id);if(el&&el!==src&&el.value!==pc)el.value=pc}
+  renderZone(); const sz=$('#szone'); if(sz) sz.innerHTML=zoneTxt();
+}
+$('#pc').addEventListener('input',e=>{e.target.value=e.target.value.replace(/\D/g,'').slice(0,4);setPc(e.target.value,e.target)});
+function renderReceipt(){
+  const p=byId(sel); $$('#receipt .ln[data-max]').forEach(l=>l.classList.remove('hit'));
+  const hit=$$('#receipt .ln[data-max]').find(l=>p.hi<=+l.dataset.max); if(hit)hit.classList.add('hit');
+}
+function renderDays(){
+  $('#days').innerHTML=days(7).map(d=>`<div><small>${(EN?DE:DN)[d.getDay()]}</small><b class="num">${d.getDate()}</b><small>${(EN?ME:MN)[d.getMonth()]}</small></div>`).join('');
+}
+
+/* ---------- reviews: his real ones (kerstboomboer.nl), only shortened ---------- */
+const REVIEWS=[
+ ['Soraya','Amsterdam Oud-West','Ik heb afgelopen jaren nooit een kerstboom gekocht die *zo recht was afgezaagd*.',1.5],
+ ['Paul','Amsterdam Noord',"Ik ben met m'n auto langsgegaan bij de drive-through bij Amsterdam Sloterdijk en kon m'n kerstboom *zo inladen*!",2],
+ ['Maaike','Amsterdam Centrum','Super veel dank voor de *twee mooie bomen* en de vriendelijke service, zeer gewaardeerd! Fijne kerst!',-1.6],
+ ['Fred','Amsterdam','*Voor de 3e keer* een kerstboom voor kantoor besteld bij Kerstboomboer. Zo makkelijk en goede service, geweldig!',-2.2],
+];
+function renderNotes(){
+  $('#notes').innerHTML=REVIEWS.map(([n,w,t,r])=>`<figure class="note rv" style="--r:${r}deg"><div class="st" aria-label="5 ${T('sterren','stars')}">★★★★★</div><p>“${t.replace(/\*(.+?)\*/g,'<mark>$1</mark>')}”</p><b>${n} · ${w}</b></figure>`).join('');
+  $$('#notes .rv').forEach(el=>revealIO.observe(el));
+}
+
+/* ---------- reveal on scroll (the stickers slap on, the rest rises) ---------- */
+const revealIO=new IntersectionObserver(es=>es.forEach(e=>{if(!e.isIntersecting)return;e.target.classList.add('in');revealIO.unobserve(e.target)}),{threshold:.18,rootMargin:'0px 0px -6% 0px'});
+$$('.sec .rv,.sec .slap,.sign .slap').forEach(el=>revealIO.observe(el));
+
+/* ---------- mobile buy bar: once the ticket is gone, never over the journey or the sign ---------- */
+function renderBuybar(){
+  const p=byId(sel), f=firstDay(now());
+  $('#bbsz').textContent=`${label(p)} cm · ${eur(p.price)}`;
+  $('#bbwhen').textContent=pre()?T(`Eerste bezorgdag ${dname(f)} · bezorging ${eur(FEE(p.hi,1))}`,`First delivery ${dname(f)} · delivery ${eur(FEE(p.hi,1))}`):T(`${dname(f)} in huis · bezorging ${eur(FEE(p.hi,1))}`,`Home ${dname(f)} · delivery ${eur(FEE(p.hi,1))}`);
+}
+$('#bbadd').onclick=()=>$('#add').click();
+function buybarVis(){
+  const away=$('#add').getBoundingClientRect().bottom<0, jr=J.getBoundingClientRect(), inJourney=jr.top<innerHeight*.5&&jr.bottom>innerHeight*.5, sign=$('.sign').getBoundingClientRect().top<innerHeight;
+  $('#buybar').classList.toggle('on',away&&!inJourney&&!sign);
+}
+addEventListener('scroll',buybarVis,{passive:true});
+
+/* ---------- live lines ---------- */
+function tick(){
+  const f=firstDay(now()),[h,m]=left();
+  $('#liveline').innerHTML=pre()
+    ? T(`We bezorgen vanaf <b>${dname(SEASON[0])}</b> · bestel nu, kies je dag`,`Deliveries from <b>${dname(SEASON[0])}</b> · order now, pick your day`)
+    : T(`Bestel binnen <b>${h} u ${pad(m)} min</b> · <b>${dname(f)}</b> in je woonkamer`,`Order within <b>${h} h ${pad(m)} min</b> · in your living room <b>${dname(f)}</b>`);
+  $('#signnote').textContent=pre()?T(`Eerste bezorgdag: ${dname(f)}`,`First delivery day: ${dname(f)}`):T(`Volgende bezorging: ${dname(f)}`,`Next delivery: ${dname(f)}`);
+  $('#dcap').textContent=pre()?T('Eerste mogelijke dag in rood, daarna elke dag tot kerst. Je kiest bij het afrekenen.','First possible day in red, then every day until Christmas. You pick at checkout.'):T('De rode dag is de eerste. Je kiest bij het afrekenen.','The red one is the earliest. You pick at checkout.');
+  $('#endday').textContent=pre()?T(`Eerste bezorgdag: ${dname(f)}`,`First delivery day: ${dname(f)}`):T(`Volgende bezorging: ${dname(f)}`,`Next delivery: ${dname(f)}`);
+}
+let lastMin=-1; setInterval(()=>{tick();const mm=now().getMinutes();if(mm!==lastMin){lastMin=mm;renderTicket()}},1000);
+
+/* ---------- language: Dutch first, English rewritten ---------- */
+$$('[data-en]').forEach(el=>el.dataset.nl=el.innerHTML);
+$('#lang').onclick=()=>{EN=!EN;document.documentElement.lang=EN?'en':'nl';$('#lang').textContent=EN?'NL':'EN';
+  $$('[data-en]').forEach(el=>el.innerHTML=EN?el.dataset.en:el.dataset.nl);
+  $$('.slap.in').forEach(h=>{h.classList.remove('in');void h.offsetWidth;h.classList.add('in')});
+  renderChips();renderTicket();renderCart();renderHomes();renderDays();renderNotes();tick()};
+
+/* ---------- TUKI preview: what still needs Thijs's OK ---------- */
+$('#chkn').textContent=$$('[data-check]').length;
+$('#chk').onclick=()=>{const on=document.body.classList.toggle('chk');$('#chk').setAttribute('aria-pressed',on)};
+
+/* first screen: the headline lands once the lights are on */
+setTimeout(()=>$('#h1').classList.add('in'),RM?0:1250);
+renderHomes();renderDays();renderNotes();renderChips();renderTicket();renderCart();tick();setChapter(0);frame();
+})();
+</script>
+</body>
+</html>
