@@ -457,7 +457,7 @@ body.chk [data-check]{outline:2px dashed #ffc933!important;outline-offset:4px}
 <section class="journey" id="reis" aria-label="Van veld tot woonkamer">
   <div class="stage" id="stage">
     <div class="amb" aria-hidden="true">
-      <img src="img/veld-11.jpg" alt="" class="on"><img src="img/team-01.jpg" alt=""><img src="img/logistiek-05.jpg" alt=""><img src="img/logistiek-06.jpg" alt=""><img src="img/kamer-320.jpg" alt=""><img src="img/kamer-270.jpg" alt="">
+      <img src="img/veld-11.jpg" alt="" class="on"><img src="img/team-01.jpg" alt=""><img src="img/logistiek-05.jpg" alt=""><img src="img/logistiek-06.jpg" alt=""><img src="img/klant-53.jpg" alt=""><img src="img/klant-33.jpg" alt="">
     </div>
     <div class="grid">
       <div class="txt">
@@ -480,13 +480,13 @@ body.chk [data-check]{outline:2px dashed #ffc933!important;outline-offset:4px}
           <h2 class="stack slap"><span class="stk c" data-en="Lights on.">Lampjes aan.</span><span class="stk" data-en="Done.">Klaar.</span></h2>
           <p data-en="And then it stays beautiful. Six weeks, at least. Longer than your New Year's resolutions." data-check="6 weken">En dan blijft hij mooi. Zes weken, minimaal. Langer dan je goede voornemens.</p></article>
       </div>
-      <div class="win" id="win">
+      <div class="win" id="win" data-check="klantfoto's: toestemming nodig">
         <video data-src="vid/video-01.mp4" muted loop playsinline preload="none" poster="img/veld-11.jpg" class="on" aria-label="Lopen tussen de rijen op het veld in Denemarken"></video>
         <video data-src="vid/video-03.mp4" muted loop playsinline preload="none" poster="img/team-01.jpg" aria-label="Een boom wordt gemeten en gemerkt"></video>
         <img src="img/logistiek-05.jpg" alt="Ingepakte bomen in netten, klaar voor de rit" loading="lazy">
         <img src="img/logistiek-06.jpg" alt="Een bus vol ingepakte bomen" loading="lazy">
-        <img src="img/kamer-320.jpg" alt="Een Nordmann in een Amsterdams grachtenpand" loading="lazy">
-        <img src="img/kamer-270.jpg" alt="Een verlichte Nordmann in een jaren-30 woonkamer" loading="lazy">
+        <img src="img/klant-53.jpg" alt="Een boom bij een oude trap, bij een klant thuis" loading="lazy">
+        <img src="img/klant-33.jpg" alt="Een verlichte boom in een woonkamer, bij een klant thuis" loading="lazy">
       </div>
     </div>
     <div class="route" aria-hidden="true">
@@ -729,8 +729,7 @@ let tt;function toast(m){const t=$('#toast');t.textContent=m;t.classList.add('sh
 /* ---------- van veld tot woonkamer ---------- */
 const J=$('#reis'), chs=$$('.ch'), media=[...$('#win').children].filter(x=>x.matches('video,img')), amb=$$('.amb img'), stops=$$('#stops span');
 const N=6, SEG=N+1.2;              // six chapters, then the wall
-const WALL=['kamer-240','kamer-270','kamer-320','kamer-400','biz-kantoor','biz-restaurant','veld-11','team-01','logistiek-05','logistiek-06','zakelijk-04','zakelijk-18','hero-hoog'];
-$('#wall').innerHTML=Array.from({length:56},(_,i)=>{const c=i%14-6.5,r=Math.floor(i/14)-1.5;return`<img src="img/${WALL[i%WALL.length]}.jpg" alt="" loading="lazy" style="--d:${Math.round(Math.hypot(c,r*2))}">`}).join('');
+$('#wall').innerHTML=Array.from({length:56},(_,i)=>{const c=i%14-6.5,r=Math.floor(i/14)-1.5;return`<img src="img/klant/klant-${pad(i+1)}.jpg" alt="" loading="lazy" style="--d:${Math.round(Math.hypot(c,r*2))}">`}).join('');
 let cur=-1, wallOn=false, ticking=false; stops.forEach((el,k)=>el.addEventListener('click',()=>goTo(k)));
 function setChapter(i){
   if(i===cur)return; cur=i;
